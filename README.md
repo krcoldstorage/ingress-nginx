@@ -1,12 +1,26 @@
 > [!NOTE]
 > # 🧊 Use Krypton's Cold Storage
 >
+> **⚠️ The images are not fully tested, so do <ins>NOT</ins> use them in production whatsoever. I simply bumped the versions, there is no guarantee everything is backwards compatible and will work just fine like before.**
+>
 > All this fork does is to bump the dependencies, so pretty much security maintenance.
 > - **NGINX Version**: 1.30.1
 > - **Alpine Version**: 3.23.4
 > - **Go(lang) Version**: 1.26.3
 >
 > Currently there are only `linux/amd64` images, as I did not want the workflow to take 4 hours to build the image. Other images are however planned.
+>
+> To use the images from this repository you can use the same Helm chart as before, but you will have to override some values:
+>
+> ```yaml
+> controller:
+>   image:
+>     registry: ghcr.io
+>     image: krcoldstorage/ingress-nginx/ingress-nginx-controller
+>     tag: v1.16.0
+>     digest: sha256:ff94534cb9d9ab30571c930daf0f3f282977708f4d8c31ec5f4e9eb4bcf93685
+>     digestChroot: sha256:02574a9934f5d3f0cf01fef28c8119af91043db6de9b6533b07717a095865f99
+> ```
 
 # Ingress NGINX Retirement
 
