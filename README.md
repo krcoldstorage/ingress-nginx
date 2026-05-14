@@ -1,3 +1,13 @@
+> [!NOTE]
+> # 🧊 Use Krypton's Cold Storage
+>
+> All this fork does is to bump the dependencies, so pretty much security maintenance.
+> - **NGINX Version**: 1.30.1
+> - **Alpine Version**: 3.23.4
+> - **Go(lang) Version**: 1.26.3
+>
+> Currently there are only `linux/amd64` images, as I did not want the workflow to take 4 hours to build the image. Other images are however planned.
+
 # Ingress NGINX Retirement
 
 ## Retiring

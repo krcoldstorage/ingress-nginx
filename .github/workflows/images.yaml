@@ -47,31 +47,31 @@ jobs:
 
       - name: Build and push nginx base image
         run: |
-          export TAG=$(cat images/nginx/TAG)
+          export NGINXTAG=$(cat images/nginx/TAG)
           cd images/nginx/rootfs && docker buildx build \
             --platform=${{ env.PLATFORMS }} \
             --push \
-            -t ghcr.io/krcoldstorage/ingress-nginx/nginx:${TAG} .
+            -t ghcr.io/krcoldstorage/ingress-nginx/nginx:${NGINXTAG} .
 
       - name: Build controller images
         run: |
-          export TAG=$(cat images/nginx/TAG)
+          export NGINXTAG=$(cat images/nginx/TAG)
           make \
-            BASE_IMAGE=ghcr.io/krcoldstorage/ingress-nginx/nginx:${TAG} \
+            BASE_IMAGE=ghcr.io/krcoldstorage/ingress-nginx/nginx:${NGINXTAG} \
             clean-image build image image-chroot
 
       - name: Tag controller images
         run: |
-          export TAG=$(cat images/nginx/TAG)
+          export CONTROLLERTAG=$(cat TAG)
           docker tag \
-            us-central1-docker.pkg.dev/k8s-staging-images/ingress-nginx/controller:${TAG} \
-            ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller:${TAG}
+            us-central1-docker.pkg.dev/k8s-staging-images/ingress-nginx/controller:${CONTROLLERTAG} \
+            ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller:${CONTROLLERTAG}
           docker tag \
-            us-central1-docker.pkg.dev/k8s-staging-images/ingress-nginx/controller-chroot:${TAG} \
-            ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller-chroot:${TAG}
+            us-central1-docker.pkg.dev/k8s-staging-images/ingress-nginx/controller-chroot:${CONTROLLERTAG} \
+            ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller-chroot:${CONTROLLERTAG}
 
       - name: Push controller images
         run: |
-          export TAG=$(cat images/nginx/TAG)
-          docker push ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller:${TAG}
-          docker push ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller-chroot:${TAG}
+          export CONTROLLERTAG=$(cat TAG)
+          docker push ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller:${CONTROLLERTAG}
+          docker push ghcr.io/krcoldstorage/ingress-nginx/ingress-nginx-controller-chroot:${CONTROLLERTAG}

@@ -59,8 +59,8 @@ jobs:
         if: |
           needs.changes.outputs.baseimage == 'true'
         run: |
-            export TAG=$(cat images/nginx/TAG)
-            cd images/nginx/rootfs && docker buildx build --platform=${{ env.PLATFORMS }} --load -t ghcr.io/krcoldstorage/ingress-nginx/nginx:${TAG} .
+            export NGINXTAG=$(cat images/nginx/TAG)
+            cd images/nginx/rootfs && docker buildx build --platform=${{ env.PLATFORMS }} --load -t ghcr.io/krcoldstorage/ingress-nginx/nginx:${NGINXTAG} .
 
       - name: Build images
         env:
@@ -68,11 +68,9 @@ jobs:
           ARCH: amd64
           REGISTRY: ingress-controller
         run: |
-          echo "building images..."
-          export TAG=$(cat images/nginx/TAG)
-          make BASE_IMAGE=ghcr.io/krcoldstorage/ingress-nginx/nginx:${TAG} clean-image build image image-chroot
+          export NGINXTAG=$(cat images/nginx/TAG)
+          make BASE_IMAGE=ghcr.io/krcoldstorage/ingress-nginx/nginx:${NGINXTAG} clean-image build image image-chroot
 
-          echo "creating images cache..."
           docker save \
             ingress-controller/controller:1.0.0-dev \
             ingress-controller/controller-chroot:1.0.0-dev \
