@@ -1,10 +1,10 @@
 > [!NOTE]
 > # 🧊 Use Krypton's Cold Storage
 >
-> **⚠️ The images are not fully tested, so do <ins>NOT</ins> use them in production whatsoever. I simply bumped the versions, there is no guarantee everything is backwards compatible and will work just fine like before.**
+> **⚠️ The images are not fully tested, so do <ins>NOT</ins> use them in production whatsoever unless you've tested it accordingly before. I simply bumped the versions, there is <ins>no guarantee</ins> everything is backwards compatible and will work just fine like before.**
 >
 > All this fork does is to bump the dependencies, so pretty much security maintenance.
-> - **NGINX Version**: 1.30.1
+> - **NGINX Version**: 1.30.2
 > - **Alpine Version**: 3.23.4
 > - **Go(lang) Version**: 1.26.3
 >
