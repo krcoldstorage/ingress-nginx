@@ -17,9 +17,9 @@
 >   image:
 >     registry: ghcr.io
 >     image: krcoldstorage/ingress-nginx/ingress-nginx-controller
->     tag: v1.16.0
->     digest: sha256:ff94534cb9d9ab30571c930daf0f3f282977708f4d8c31ec5f4e9eb4bcf93685
->     digestChroot: sha256:02574a9934f5d3f0cf01fef28c8119af91043db6de9b6533b07717a095865f99
+>     tag: v1.16.1
+>     digest: sha256:5d343d84eefc605266dc79266bde08a924e44b53f75442fa83c314ff15038c5a
+>     digestChroot: sha256:49b5c526439e367a75a89b671a5f231ba7c8986beedc1d617393efcc078e9bdf
 > ```
 
 # Ingress NGINX Retirement
