@@ -18,7 +18,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-export NGINX_VERSION=1.30.1
+export NGINX_VERSION=1.30.2
 
 # Check for recent changes: https://github.com/vision5/ngx_devel_kit/compare/v0.3.3...master
 export NDK_VERSION=v0.3.3
@@ -104,8 +104,8 @@ export OPENTELEMETRY_CPP_VERSION=v1.19.0
 # Check for recent changes: https://github.com/open-telemetry/opentelemetry-proto/compare/v1.5.0...main
 export OPENTELEMETRY_PROTO_VERSION=v1.5.0
 
-# Check for recent changes: https://github.com/nginx/njs/compare/0.9.0...master
-export NJS_VERSION=0.9.0
+# Check for recent changes: https://github.com/nginx/njs/compare/0.9.9...master
+export NJS_VERSION=0.9.9
 
 export BUILD_PATH=/tmp/build
 
@@ -189,7 +189,7 @@ mkdir --verbose -p "$BUILD_PATH"
 cd "$BUILD_PATH"
 
 # download, verify and extract the source files
-get_src 99765000d974896b31ca5882d8c279ce3fe7ef6f5c6f9f0a967ed7fd3407f9cc \
+get_src 7df3090907fca3cc0e456d6dc00ceb230da74ea88026ceff0affc29dbbd9ac4c \
         "https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
 get_src aa961eafb8317e0eb8da37eb6e2c9ff42267edd18b56947384e719b85188f58b \
@@ -270,7 +270,7 @@ get_src efb767487ea3f6031577b9b224467ddbda2ad51a41c5867a47582d4ad85d609e \
 get_src d74f86ada2329016068bc5a243268f1f555edd620b6a7d6ce89295e7d6cf18da \
         "https://github.com/microsoft/mimalloc/archive/${MIMALOC_VERSION}.tar.gz" "mimalloc"
 
-get_src abc123 \
+get_src a07f4cf0a2076bbabde23cab48aea68641ebf5d54ea69b415ce70a8da4153843 \
         "https://github.com/nginx/njs/archive/${NJS_VERSION}.tar.gz" "njs"
 
 # improve compilation times
