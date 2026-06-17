@@ -29,8 +29,8 @@ SHELL=/bin/bash -o pipefail -o errexit
 # Use the 0.0 tag for testing, it shouldn't clobber any release builds
 TAG ?= $(shell cat TAG)
 
-# The env below is called GO_VERSION and not GOLANG_VERSION because 
-# the gcb image we use to build already defines GOLANG_VERSION and is a 
+# The env below is called GO_VERSION and not GOLANG_VERSION because
+# the gcb image we use to build already defines GOLANG_VERSION and is a
 # really old version
 GO_VERSION ?= $(shell cat GOLANG_VERSION)
 
@@ -110,7 +110,7 @@ clean-chroot-image: ## Removes local image
 
 .PHONY: build
 build:  ## Build ingress controller, debug tool and pre-stop hook.
-	E2E_IMAGE=golang:$(GO_VERSION)-alpine3.23 USE_SHELL=/bin/sh build/run-in-docker.sh \
+	E2E_IMAGE=golang:$(GO_VERSION)-alpine3.24 USE_SHELL=/bin/sh build/run-in-docker.sh \
 		MAC_OS=$(MAC_OS) \
 		PKG=$(PKG) \
 		ARCH=$(ARCH) \
