@@ -6,4 +6,4 @@
 1. Update NGINX `images/nginx/rootfs/build.sh` version and hash below
 1. Update `README.md` versions and tags
 1. Trigger workflow "Container Images
-1. Update `README.md` hashes
+1. Update `README.md` digest
