@@ -6,7 +6,7 @@
 > All this fork does is to bump the dependencies, so pretty much security maintenance.
 > - **NGINX Version**: 1.30.4
 > - **Alpine Version**: 3.24.1
-> - **Go(lang) Version**: 1.26.5
+> - **Go(lang) Version**: 1.26.8
 >
 > Currently there are only `linux/amd64` images, as I did not want the workflow to take 4 hours to build the image. Other images are however planned.
 >
@@ -17,7 +17,7 @@
 >   image:
 >     registry: ghcr.io
 >     image: krcoldstorage/ingress-nginx/ingress-nginx-controller
->     tag: v1.16.3
+>     tag: v1.16.4
 >     digest: sha256:57410444b5dc2f844e64846dc49cfac8c6c2db310461971e6208667967ae6fa4
 >     digestChroot: sha256:b05370f3102ab7238b42038ab19438e0d8b42cb977adb24dfd107dc890c94a88
 > ```
