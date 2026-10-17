@@ -1,7 +1,7 @@
 > [!NOTE]
 > # 🧊 Use Krypton's Cold Storage
 >
-> **⚠️ The images are not fully tested, so do <ins>NOT</ins> use them in production whatsoever unless you've tested it accordingly before. I simply bumped the versions, there is <ins>no guarantee</ins> everything is backwards compatible and will work just fine like before. I've tested on a <ins>simple</ins> setup and it works.**
+> **⚠️ The images are not fully tested, so do <ins>NOT</ins> use them in production unless you've tested it accordingly before. I simply bumped the versions, there is <ins>no guarantee</ins> everything is backwards compatible and will work just fine like before. I've tested on a <ins>simple</ins> setup and it works.**
 >
 > All this fork does is to bump the dependencies, so pretty much security maintenance.
 > - **NGINX Version**: 1.30.6
@@ -18,8 +18,8 @@
 >     registry: ghcr.io
 >     image: krcoldstorage/ingress-nginx/ingress-nginx-controller
 >     tag: v1.16.5
->     digest: sha256:cc7c7f507beb49840b576923e8d97d92173bd2293c018b6f92eaf93fa8b2ef71
->     digestChroot: sha256:e1a04e64ed30c323d4ee6146abfff064e63425b0c005cd1b231c2b320e81b958
+>     digest: sha256:fab4f02d163cd758fa2677fd560beb7cb7f4c44b017424f68e0a796726213138
+>     digestChroot: sha256:56a613a9ca94953e92164d09e18529ff4eeed819ffc66e09786decaa1f92efff
 > ```
 
 # Ingress NGINX Retirement
