@@ -1,6 +1,6 @@
 # Upgrade NGINX version used
 
-1. Check golang version as well
+1. Update golang version in `GOLANG_VERSION`
 1. Update ingress controller `TAG` file
 1. Update NGINX `images/nginx/TAG` file
 1. Update NGINX `images/nginx/rootfs/build.sh` version and hash below

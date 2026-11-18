@@ -4,9 +4,9 @@
 > **⚠️ The images are not fully tested, so do <ins>NOT</ins> use them in production unless you've tested it accordingly before. I simply bumped the versions, there is <ins>no guarantee</ins> everything is backwards compatible and will work just fine like before. I've tested on a <ins>simple</ins> setup and it works.**
 >
 > All this fork does is to bump the dependencies, so pretty much security maintenance.
-> - **NGINX Version**: 1.30.6
-> - **Alpine Version**: 3.24.2
-> - **Go(lang) Version**: 1.26.9
+> - **NGINX Version**: 1.30.7
+> - **Alpine Version**: 3.24.4
+> - **Go(lang) Version**: 1.27.4
 >
 > Currently there are only `linux/amd64` images, as I did not want the workflow to take 4 hours to build the image. Other images are however planned.
 >
@@ -17,7 +17,7 @@
 >   image:
 >     registry: ghcr.io
 >     image: krcoldstorage/ingress-nginx/ingress-nginx-controller
->     tag: v1.16.5
+>     tag: v1.17.0
 >     digest: sha256:fab4f02d163cd758fa2677fd560beb7cb7f4c44b017424f68e0a796726213138
 >     digestChroot: sha256:56a613a9ca94953e92164d09e18529ff4eeed819ffc66e09786decaa1f92efff
 > ```
