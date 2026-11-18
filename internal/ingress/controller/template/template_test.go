@@ -35,6 +35,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"k8s.io/ingress-nginx/internal/ingress/annotations/authreq"
+	"k8s.io/ingress-nginx/internal/ingress/annotations/mirror"
 	"k8s.io/ingress-nginx/internal/ingress/annotations/modsecurity"
 	"k8s.io/ingress-nginx/internal/ingress/annotations/opentelemetry"
 	"k8s.io/ingress-nginx/internal/ingress/annotations/ratelimit"
@@ -211,6 +212,21 @@ func getTestDataDir() (string, error) {
 		return "", err
 	}
 	return path.Join(pwd, "../../../../test/data"), nil
+}
+
+func TestBuildMirrorLocationsMarksRequests(t *testing.T) {
+	locations := []*ingress.Location{{
+		Mirror: mirror.Config{
+			Source: "/_mirror-test",
+			Target: "http://127.0.0.1:10246/configuration/backends",
+			Host:   "127.0.0.1",
+		},
+	}}
+
+	result := buildMirrorLocations(locations)
+	if !strings.Contains(result, `proxy_set_header X-Ingress-Nginx-Mirror "1";`) {
+		t.Fatalf("expected mirror location to mark proxied requests, got:\n%s", result)
+	}
 }
 
 func TestBuildLuaSharedDictionaries(t *testing.T) {
