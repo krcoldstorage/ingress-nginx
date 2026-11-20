@@ -320,7 +320,7 @@ git config --global --add core.compression -1
 cd "$BUILD_PATH"
 git clone --depth=100 https://github.com/google/ngx_brotli.git
 cd ngx_brotli
-git reset --hard a71f9312c2deb28875acc7bacfdd5695a111aa53
+git reset --hard 53e0fb55f250f48fe80c0ddbf6c0f7103cdbaae1
 git submodule init
 git submodule update
 
