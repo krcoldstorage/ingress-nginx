@@ -1,8 +1,8 @@
 diff --git a/src/event/ngx_event.c b/src/event/ngx_event.c
-index 57af8132..4853945f 100644
+index a53192260..548a47a85 100644
 --- a/src/event/ngx_event.c
 +++ b/src/event/ngx_event.c
-@@ -196,6 +196,9 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
+@@ -197,6 +197,9 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
      ngx_uint_t  flags;
      ngx_msec_t  timer, delta;
  
@@ -12,7 +12,7 @@ index 57af8132..4853945f 100644
      if (ngx_timer_resolution) {
          timer = NGX_TIMER_INFINITE;
          flags = 0;
-@@ -215,6 +218,13 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
+@@ -216,6 +219,13 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
  #endif
      }
  
@@ -26,8 +26,8 @@ index 57af8132..4853945f 100644
      if (ngx_use_accept_mutex) {
          if (ngx_accept_disabled > 0) {
              ngx_accept_disabled--;
-@@ -257,6 +267,35 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
-     }
+@@ -261,6 +271,35 @@ ngx_process_events_and_timers(ngx_cycle_t *cycle)
+     ngx_event_expire_timers();
  
      ngx_event_process_posted(cycle, &ngx_posted_events);
 +
@@ -62,33 +62,33 @@ index 57af8132..4853945f 100644
  }
  
  
-@@ -600,6 +639,7 @@ ngx_event_process_init(ngx_cycle_t *cycle)
- 
+@@ -667,6 +706,7 @@ ngx_event_process_init(ngx_cycle_t *cycle)
      ngx_queue_init(&ngx_posted_accept_events);
+     ngx_queue_init(&ngx_posted_next_events);
      ngx_queue_init(&ngx_posted_events);
 +    ngx_queue_init(&ngx_posted_delayed_events);
  
      if (ngx_event_timer_init(cycle->log) == NGX_ERROR) {
          return NGX_ERROR;
 diff --git a/src/event/ngx_event_posted.c b/src/event/ngx_event_posted.c
-index d851f3d1..b6cea009 100644
+index fa575bd87..bb42e65f1 100644
 --- a/src/event/ngx_event_posted.c
 +++ b/src/event/ngx_event_posted.c
-@@ -12,6 +12,7 @@
- 
+@@ -13,6 +13,7 @@
  ngx_queue_t  ngx_posted_accept_events;
+ ngx_queue_t  ngx_posted_next_events;
  ngx_queue_t  ngx_posted_events;
 +ngx_queue_t  ngx_posted_delayed_events;
  
  
  void
 diff --git a/src/event/ngx_event_posted.h b/src/event/ngx_event_posted.h
-index 145d30fe..6c388553 100644
+index b1a85c442..be061dc9f 100644
 --- a/src/event/ngx_event_posted.h
 +++ b/src/event/ngx_event_posted.h
-@@ -43,6 +43,9 @@ void ngx_event_process_posted(ngx_cycle_t *cycle, ngx_queue_t *posted);
- 
+@@ -45,6 +45,9 @@ void ngx_event_move_posted_next(ngx_cycle_t *cycle);
  extern ngx_queue_t  ngx_posted_accept_events;
+ extern ngx_queue_t  ngx_posted_next_events;
  extern ngx_queue_t  ngx_posted_events;
 +extern ngx_queue_t  ngx_posted_delayed_events;
 +

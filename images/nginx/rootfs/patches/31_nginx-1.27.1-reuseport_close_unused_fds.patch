@@ -1,7 +1,8 @@
 diff --git a/src/core/ngx_connection.c b/src/core/ngx_connection.c
+index 41d86e8e3..56a563ff0 100644
 --- a/src/core/ngx_connection.c
 +++ b/src/core/ngx_connection.c
-@@ -1118,6 +1118,12 @@ ngx_close_listening_sockets(ngx_cycle_t *cycle)
+@@ -1135,6 +1135,12 @@ ngx_close_listening_sockets(ngx_cycle_t *cycle)
      ls = cycle->listening.elts;
      for (i = 0; i < cycle->listening.nelts; i++) {
  
@@ -11,13 +12,14 @@ diff --git a/src/core/ngx_connection.c b/src/core/ngx_connection.c
 +        }
 +#endif
 +
-         c = ls[i].connection;
- 
-         if (c) {
+ #if (NGX_QUIC)
+         if (ls[i].quic
+             && (!ls[i].reuseport || !ngx_quic_bpf_enabled(cycle)))
 diff --git a/src/event/ngx_event.c b/src/event/ngx_event.c
+index a53192260..64c013249 100644
 --- a/src/event/ngx_event.c
 +++ b/src/event/ngx_event.c
-@@ -775,6 +775,18 @@ ngx_event_process_init(ngx_cycle_t *cycle)
+@@ -802,6 +802,18 @@ ngx_event_process_init(ngx_cycle_t *cycle)
  
  #if (NGX_HAVE_REUSEPORT)
          if (ls[i].reuseport && ls[i].worker != ngx_worker) {

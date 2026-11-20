@@ -1,5 +1,5 @@
 diff --git a/src/core/ngx_cycle.h b/src/core/ngx_cycle.h
-index c51b7ff..4c335b9 100644
+index 0c47f25fe..52c494090 100644
 --- a/src/core/ngx_cycle.h
 +++ b/src/core/ngx_cycle.h
 @@ -22,9 +22,14 @@
@@ -17,8 +17,8 @@ index c51b7ff..4c335b9 100644
  
  struct ngx_shm_zone_s {
      void                     *data;
-@@ -75,6 +80,10 @@ struct ngx_cycle_s {
-     ngx_str_t                 prefix;
+@@ -83,6 +88,10 @@ struct ngx_cycle_s {
+     ngx_str_t                 error_log;
      ngx_str_t                 lock_file;
      ngx_str_t                 hostname;
 +
@@ -29,7 +29,7 @@ index c51b7ff..4c335b9 100644
  
  
 diff --git a/src/core/ngx_log.c b/src/core/ngx_log.c
-index 8e9408d..ed9b11b 100644
+index 0c094265e..eb7a98981 100644
 --- a/src/core/ngx_log.c
 +++ b/src/core/ngx_log.c
 @@ -112,6 +112,8 @@ ngx_log_error_core(ngx_uint_t level, ngx_log_t *log, ngx_err_t err,

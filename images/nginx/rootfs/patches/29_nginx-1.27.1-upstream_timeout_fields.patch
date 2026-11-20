@@ -1,8 +1,8 @@
 diff --git a/src/http/ngx_http_upstream.c b/src/http/ngx_http_upstream.c
-index 69019417..2265d8f7 100644
+index c54ef3949..b7695e923 100644
 --- a/src/http/ngx_http_upstream.c
 +++ b/src/http/ngx_http_upstream.c
-@@ -509,12 +509,19 @@ void
+@@ -549,12 +549,19 @@ void
  ngx_http_upstream_init(ngx_http_request_t *r)
  {
      ngx_connection_t     *c;
@@ -22,8 +22,8 @@ index 69019417..2265d8f7 100644
  #if (NGX_HTTP_V2)
      if (r->stream) {
          ngx_http_upstream_init_request(r);
-@@ -1626,7 +1633,7 @@ ngx_http_upstream_connect(ngx_http_request_t *r, ngx_http_upstream_t *u)
-     u->request_body_blocked = 0;
+@@ -1734,7 +1741,7 @@ ngx_http_upstream_connect(ngx_http_request_t *r, ngx_http_upstream_t *u)
+     u->response_received = 0;
  
      if (rc == NGX_AGAIN) {
 -        ngx_add_timer(c->write, u->conf->connect_timeout);
@@ -31,7 +31,7 @@ index 69019417..2265d8f7 100644
          return;
      }
  
-@@ -1704,7 +1711,7 @@ ngx_http_upstream_ssl_init_connection(ngx_http_request_t *r,
+@@ -1838,7 +1845,7 @@ ngx_http_upstream_ssl_init_connection(ngx_http_request_t *r,
      if (rc == NGX_AGAIN) {
  
          if (!c->write->timer_set) {
@@ -40,7 +40,7 @@ index 69019417..2265d8f7 100644
          }
  
          c->ssl->handler = ngx_http_upstream_ssl_handshake_handler;
-@@ -2022,7 +2029,7 @@ ngx_http_upstream_send_request(ngx_http_request_t *r, ngx_http_upstream_t *u,
+@@ -2203,7 +2210,7 @@ ngx_http_upstream_send_request(ngx_http_request_t *r, ngx_http_upstream_t *u,
  
      if (rc == NGX_AGAIN) {
          if (!c->write->ready || u->request_body_blocked) {
@@ -49,7 +49,7 @@ index 69019417..2265d8f7 100644
  
          } else if (c->write->timer_set) {
              ngx_del_timer(c->write);
-@@ -2084,7 +2091,7 @@ ngx_http_upstream_send_request(ngx_http_request_t *r, ngx_http_upstream_t *u,
+@@ -2274,7 +2281,7 @@ ngx_http_upstream_send_request(ngx_http_request_t *r, ngx_http_upstream_t *u,
              return;
          }
  
@@ -58,7 +58,7 @@ index 69019417..2265d8f7 100644
  
          if (c->read->ready) {
              ngx_http_upstream_process_header(r, u);
-@@ -3213,7 +3220,7 @@ ngx_http_upstream_send_response(ngx_http_request_t *r, ngx_http_upstream_t *u)
+@@ -3603,7 +3610,7 @@ ngx_http_upstream_send_response(ngx_http_request_t *r, ngx_http_upstream_t *u)
          p->cyclic_temp_file = 0;
      }
  
@@ -67,7 +67,7 @@ index 69019417..2265d8f7 100644
      p->send_timeout = clcf->send_timeout;
      p->send_lowat = clcf->send_lowat;
  
-@@ -3458,7 +3465,7 @@ ngx_http_upstream_process_upgraded(ngx_http_request_t *r,
+@@ -3849,7 +3856,7 @@ ngx_http_upstream_process_upgraded(ngx_http_request_t *r,
      }
  
      if (upstream->write->active && !upstream->write->ready) {
@@ -76,7 +76,7 @@ index 69019417..2265d8f7 100644
  
      } else if (upstream->write->timer_set) {
          ngx_del_timer(upstream->write);
-@@ -3470,7 +3477,7 @@ ngx_http_upstream_process_upgraded(ngx_http_request_t *r,
+@@ -3868,7 +3875,7 @@ ngx_http_upstream_process_upgraded(ngx_http_request_t *r,
      }
  
      if (upstream->read->active && !upstream->read->ready) {
@@ -85,7 +85,7 @@ index 69019417..2265d8f7 100644
  
      } else if (upstream->read->timer_set) {
          ngx_del_timer(upstream->read);
-@@ -3664,7 +3671,7 @@ ngx_http_upstream_process_non_buffered_request(ngx_http_request_t *r,
+@@ -4077,7 +4084,7 @@ ngx_http_upstream_process_non_buffered_request(ngx_http_request_t *r,
      }
  
      if (upstream->read->active && !upstream->read->ready) {
@@ -95,10 +95,10 @@ index 69019417..2265d8f7 100644
      } else if (upstream->read->timer_set) {
          ngx_del_timer(upstream->read);
 diff --git a/src/http/ngx_http_upstream.h b/src/http/ngx_http_upstream.h
-index c2f4dc0b..b9eef118 100644
+index 74d55ef1c..8cf1418ae 100644
 --- a/src/http/ngx_http_upstream.h
 +++ b/src/http/ngx_http_upstream.h
-@@ -333,6 +333,11 @@ struct ngx_http_upstream_s {
+@@ -358,6 +358,11 @@ struct ngx_http_upstream_s {
      ngx_array_t                     *caches;
  #endif
  

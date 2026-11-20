@@ -1,8 +1,8 @@
 diff --git a/src/event/ngx_event_openssl.c b/src/event/ngx_event_openssl.c
-index 8ba30e58..2b2db95c 100644
+index 1508e13f4..97ede9a41 100644
 --- a/src/event/ngx_event_openssl.c
 +++ b/src/event/ngx_event_openssl.c
-@@ -1712,6 +1712,9 @@ ngx_ssl_handshake(ngx_connection_t *c)
+@@ -2321,6 +2321,9 @@ ngx_ssl_handshake(ngx_connection_t *c)
      if (sslerr == SSL_ERROR_WANT_X509_LOOKUP
  #   ifdef SSL_ERROR_PENDING_SESSION
          || sslerr == SSL_ERROR_PENDING_SESSION
@@ -12,7 +12,7 @@ index 8ba30e58..2b2db95c 100644
  #   endif
         )
      {
-@@ -1889,6 +1892,23 @@ ngx_ssl_try_early_data(ngx_connection_t *c)
+@@ -2529,6 +2532,23 @@ ngx_ssl_try_early_data(ngx_connection_t *c)
      }
  #endif
  
@@ -35,4 +35,4 @@ index 8ba30e58..2b2db95c 100644
 +
      err = (sslerr == SSL_ERROR_SYSCALL) ? ngx_errno : 0;
  
-     c->ssl->no_wait_shutdown = 1;
+     if (sslerr == SSL_ERROR_SYSCALL && ERR_peek_error() == 0 && err == 0) {
